@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var userQuestion = '';
   var userAnswer = '';
+  var preAnswer = '';
   final List<String> buttons = [
     'C',
     'DEL',
@@ -56,6 +57,7 @@ class _HomePageState extends State<HomePage> {
   void equalPressed() {
     String finalQuestion = userQuestion;
     finalQuestion = finalQuestion.replaceAll('x', '*');
+    finalQuestion = finalQuestion.replaceAll('ANS', 'preAnswer');
 
     Parser p = Parser();
     Expression exp = p.parse(finalQuestion);
@@ -152,7 +154,22 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                     //answerbutton
-                
+                    else if (index == buttons.length - 2) {
+                      return MyButton(
+                        buttonTapped: () {
+                          setState(() {
+                            preAnswer = userAnswer;
+                          });
+                        },
+                        buttonText: buttons[index],
+                        color: isOperator(buttons[index])
+                            ? Colors.deepPurple
+                            : Colors.deepPurple[50],
+                        textColor: isOperator(buttons[index])
+                            ? Colors.white
+                            : Colors.deepPurple,
+                      );
+                    }
                     //remaining buttons
                     else {
                       return MyButton(
