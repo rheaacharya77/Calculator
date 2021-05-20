@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   void equalPressed() {
     String finalQuestion = userQuestion;
     finalQuestion = finalQuestion.replaceAll('x', '*');
-    finalQuestion = finalQuestion.replaceAll('ANS', 'preAnswer');
+    finalQuestion = finalQuestion.replaceAll('ANS', '$preAnswer');
 
     Parser p = Parser();
     Expression exp = p.parse(finalQuestion);
@@ -159,6 +159,7 @@ class _HomePageState extends State<HomePage> {
                         buttonTapped: () {
                           setState(() {
                             preAnswer = userAnswer;
+                            userQuestion += preAnswer;
                           });
                         },
                         buttonText: buttons[index],
